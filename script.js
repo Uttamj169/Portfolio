@@ -1,23 +1,32 @@
+// Navigation drawer toggle for mobile
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav-links');
 
-toggle?.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', String(isOpen));
-});
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
 
-document.querySelectorAll('.nav-links a').forEach((link) => link.addEventListener('click', () => {
-  nav.classList.remove('open');
-  toggle?.setAttribute('aria-expanded', 'false');
-}));
+  // Close menu when clicking on any navigation anchor
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 
-const year = document.querySelector('#year');
-if (year) year.textContent = new Date().getFullYear();
+  // Close menu when pressing Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
 
-const previousEmail = 'uttamjcareers@gmail.com';
-const contactEmail = 'cybercraftstudio@cybercraftstudio.net';
-
-document.querySelectorAll(`a[href*="${previousEmail}"]`).forEach((link) => {
-  link.href = link.href.replace(previousEmail, contactEmail);
-  if (link.textContent.includes(previousEmail)) link.textContent = contactEmail;
-});
+// Set dynamic copyright year
+const yearEl = document.querySelector('#year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
