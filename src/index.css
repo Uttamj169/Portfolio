@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+@import "tailwindcss";
+@theme { --font-sans:"DM Sans",Arial,sans-serif; --font-serif:"Playfair Display",Georgia,serif; --font-mono:"DM Mono",monospace; --color-paper:#f3eee4; --color-ink:#201f1b; --color-rust:#a8523d; --color-line:#d0c6b6; --color-copy:#625c52; --color-sand:#e5d8c3; --color-mint:#d4e0db; }
+@layer base { html { scroll-behavior:smooth } body { @apply bg-paper font-sans text-ink antialiased } }
+
+@layer components {
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  main > section:first-child { animation: hero-in 800ms cubic-bezier(.22,1,.36,1) both; }
+  a[href^="mailto:"], a[href="#contact"] { transition: transform 220ms ease, background-color 220ms ease, color 220ms ease; }
+  a[href^="mailto:"]:hover, a[href="#contact"]:hover { transform: translateY(-2px); }
+  article { transition: transform 260ms cubic-bezier(.22,1,.36,1), box-shadow 260ms cubic-bezier(.22,1,.36,1); }
+  article:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(32,31,27,.08); }
+  @keyframes hero-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 1ms !important; }
+}

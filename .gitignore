@@ -1,1 +1,4 @@
 Data.pdf
+node_modules/
+dist/
+backup
